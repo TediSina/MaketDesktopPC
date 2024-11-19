@@ -1,0 +1,39 @@
+{
+  "name": "maketdesktoppc",
+  "version": "1.0.0",
+  "description": "Një maket 3D i cili përshkruan çdo pjesë të sistemit kompjuterik.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TediSina/MaketDesktopPC.git"
+  },
+  "keywords": [
+    "Maket",
+    "Model",
+    "3D",
+    "Kompjuter",
+    "Computer"
+  ],
+  "author": "Tedi Sina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TediSina/MaketDesktopPC/issues"
+  },
+  "homepage": "https://github.com/TediSina/MaketDesktopPC#readme",
+  "devDependencies": {
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^7.34.2",
+    "@babylonjs/loaders": "^7.34.2",
+    "@babylonjs/materials": "^7.34.2",
+    "file-loader": "^6.2.0"
+  }
+}
