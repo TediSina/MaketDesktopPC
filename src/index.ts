@@ -9,6 +9,7 @@ import {
 import "@babylonjs/loaders/glTF";
 import * as GUI from "@babylonjs/gui";
 import desktopPCPath from "./assets/models/gaming_desktop_pc/scene.gltf";
+import { Inspector } from "@babylonjs/inspector";
 
 const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
 const engine = new Engine(canvas, true);
@@ -46,35 +47,43 @@ guiContainer.addControl(guiPanel);
 const parts = [
   {
     "title": "CPU: Central Processing Unit",
-    "description": "Procesori kryesor i sistemit. Përpunon të gjitha udhëzimet e dhëna nga softueri dhe hardueri. Ndikon direkt në performancën e përgjithshme të kompjuterit."
+    "description": "Procesori kryesor i sistemit. Përpunon të gjitha udhëzimet e dhëna nga softueri dhe hardueri. Ndikon direkt në performancën e përgjithshme të kompjuterit.",
+    "location": [0.5, 2, -3.5]
   },
   {
     "title": "GPU: Graphics Processing Unit",
-    "description": "Përgjegjës për përpunimin dhe paraqitjen e grafikave dhe vizualizimeve komplekse. E rëndësishme për lojëra, dizajn grafik dhe aplikacione të AI."
+    "description": "Përgjegjës për përpunimin dhe paraqitjen e grafikave dhe vizualizimeve komplekse. E rëndësishme për lojëra, dizajn grafik dhe aplikacione të AI.",
+    "location": [1, 1, 1]
   },
   {
     "title": "RAM: Random Access Memory",
-    "description": "Kujtesë afatshkurtër ku ruhen përkohësisht të dhënat që përdoren nga proceset aktive. Ndikon në shpejtësinë dhe aftësinë multitasking të sistemit."
+    "description": "Kujtesë afatshkurtër ku ruhen përkohësisht të dhënat që përdoren nga proceset aktive. Ndikon në shpejtësinë dhe aftësinë multitasking të sistemit.",
+    "location": [1, 1, 1]
   },
   {
     "title": "Motherboard",
-    "description": "Komponenti qendror që lidh dhe koordinon të gjithë pjesët e tjera të sistemit. Përfshin porta, konektorë dhe rrugë elektrike për komunikim të ndërsjellë."
+    "description": "Komponenti qendror që lidh dhe koordinon të gjithë pjesët e tjera të sistemit. Përfshin porta, konektorë dhe rrugë elektrike për komunikim të ndërsjellë.",
+    "location": [1, 1, 1]
   },
   {
     "title": "Storage: SSD ose HDD",
-    "description": "Pajisje për ruajtjen afatgjatë të të dhënave dhe skedarëve. SSD ofron shpejtësi më të lartë, ndërsa HDD ka kapacitet më të madh me kosto më të ulët."
+    "description": "Pajisje për ruajtjen afatgjatë të të dhënave dhe skedarëve. SSD ofron shpejtësi më të lartë, ndërsa HDD ka kapacitet më të madh me kosto më të ulët.",
+    "location": [1, 1, 1]
   },
   {
     "title": "PSU: Power Supply Unit",
-    "description": "Konverton energjinë elektrike nga rrjeti në energji DC që përdorin komponentët. Siguron furnizim të qëndrueshëm dhe të sigurt."
+    "description": "Konverton energjinë elektrike nga rrjeti në energji DC që përdorin komponentët. Siguron furnizim të qëndrueshëm dhe të sigurt.",
+    "location": [1, 1, 1]
   },
   {
     "title": "Cooling System",
-    "description": "Përfshin ventilatorët dhe/ose ftohësit me ujë për të mbajtur temperaturën e sistemit brenda kufijve të sigurt. Parandalon mbinxehjen dhe degradimin e performancës."
+    "description": "Përfshin ventilatorët dhe/ose ftohësit me ujë për të mbajtur temperaturën e sistemit brenda kufijve të sigurt. Parandalon mbinxehjen dhe degradimin e performancës.",
+    "location": [1, 1, 1]
   },
   {
     "title": "Case",
-    "description": "Një strukturë mbrojtëse që përmban dhe organizon komponentët e brendshëm. Siguron qasje të lehtë për përditësime dhe ventilim të mirë për ftohje."
+    "description": "Një strukturë mbrojtëse që përmban dhe organizon komponentët e brendshëm. Siguron qasje të lehtë për përditësime dhe ventilim të mirë për ftohje.",
+    "location": [1, 1, 1]
   }
 ];
 
@@ -115,6 +124,10 @@ parts.forEach((part, index) => {
   shikoButton.background = "blue";
   shikoButton.onPointerClickObservable.add(() => {
     console.log(`Shiko button clicked for: ${part.title}`);
+    camera.alpha = Math.PI / 1.25;
+    camera.beta = Math.PI / 3;
+    camera.radius = 7;
+    camera.target = new Vector3(...part.location);
   });
   buttonGrid.addControl(shikoButton, 0, 0);
 
@@ -138,4 +151,14 @@ engine.runRenderLoop(() => {
 
 window.addEventListener("resize", () => {
   engine.resize();
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.shiftKey && event.ctrlKey && event.altKey && event.key === "D") {
+      if (Inspector.IsVisible) {
+        Inspector.Hide();
+      } else {
+        Inspector.Show(scene, {});
+      }
+  }
 });
