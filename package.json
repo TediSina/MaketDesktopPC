@@ -4,6 +4,7 @@
   "description": "Një maket 3D i cili përshkruan çdo pjesë të sistemit kompjuterik.",
   "main": "index.js",
   "scripts": {
+    "start": "npx webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

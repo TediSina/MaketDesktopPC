@@ -17,6 +17,7 @@ const scene = new Scene(engine);
 
 const camera = new ArcRotateCamera("Camera", Math.PI / 1.25, Math.PI / 3, 7, new Vector3(0.5, 2, -3.5), scene);
 camera.attachControl(canvas, true);
+camera.wheelPrecision = 30;
 
 const light = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
 light.intensity = 0.7;
@@ -48,42 +49,90 @@ const parts = [
   {
     "title": "CPU: Central Processing Unit",
     "description": "Procesori kryesor i sistemit. Përpunon të gjitha udhëzimet e dhëna nga softueri dhe hardueri. Ndikon direkt në performancën e përgjithshme të kompjuterit.",
-    "location": [0.5, 2, -3.5]
+    "camera": {
+      "alpha": 2,
+      "beta": 1.4,
+      "radius": 2.8,
+      "target": [1.4, 2.5, -3.6],
+      "position": [0.25, 2.97, -1.09]
+    }
   },
   {
     "title": "GPU: Graphics Processing Unit",
     "description": "Përgjegjës për përpunimin dhe paraqitjen e grafikave dhe vizualizimeve komplekse. E rëndësishme për lojëra, dizajn grafik dhe aplikacione të AI.",
-    "location": [1, 1, 1]
+    "camera": {
+      "alpha": 1.56,
+      "beta": 2.01,
+      "radius": 3.68,
+      "target": [0.88, 1.89, -3.69],
+      "position": [0.91, 0.31, -0.36]
+    }
   },
   {
     "title": "RAM: Random Access Memory",
     "description": "Kujtesë afatshkurtër ku ruhen përkohësisht të dhënat që përdoren nga proceset aktive. Ndikon në shpejtësinë dhe aftësinë multitasking të sistemit.",
-    "location": [1, 1, 1]
+    "camera": {
+      "alpha": 1.86,
+      "beta": 1.39,
+      "radius": 2.8,
+      "target": [1.01, 2.57, -4.34],
+      "position": [0.206, 3.069, -1.706]
+    }
   },
   {
     "title": "Motherboard",
     "description": "Komponenti qendror që lidh dhe koordinon të gjithë pjesët e tjera të sistemit. Përfshin porta, konektorë dhe rrugë elektrike për komunikim të ndërsjellë.",
-    "location": [1, 1, 1]
+    "camera": {
+      "alpha": 1.5345,
+      "beta": 1.7108,
+      "radius": 4.41,
+      "target": [1.318, 2.456, -4.45],
+      "position": [1.4767, 1.84, -0.086]
+    }
   },
   {
     "title": "Storage: SSD ose HDD",
     "description": "Pajisje për ruajtjen afatgjatë të të dhënave dhe skedarëve. SSD ofron shpejtësi më të lartë, ndërsa HDD ka kapacitet më të madh me kosto më të ulët.",
-    "location": [1, 1, 1]
+    "camera": {
+      "alpha": 1.58,
+      "beta": 1.575,
+      "radius": 2.7987,
+      "target": [1.735, 1.3628, -4.40041],
+      "position": [1.70409, 1.349747, -1.60186]
+    }
   },
   {
     "title": "PSU: Power Supply Unit",
     "description": "Konverton energjinë elektrike nga rrjeti në energji DC që përdorin komponentët. Siguron furnizim të qëndrueshëm dhe të sigurt.",
-    "location": [1, 1, 1]
+    "camera": {
+      "alpha": 1.55,
+      "beta": 1.505,
+      "radius": 2.6775,
+      "target": [2.007, 0.7828, -3.449],
+      "position": [1.9585, 0.690255, -0.77349]
+    }
   },
   {
     "title": "Cooling System",
     "description": "Përfshin ventilatorët dhe/ose ftohësit me ujë për të mbajtur temperaturën e sistemit brenda kufijve të sigurt. Parandalon mbinxehjen dhe degradimin e performancës.",
-    "location": [1, 1, 1]
+    "camera": {
+      "alpha": 1.6058,
+      "beta": 2.5732,
+      "radius": 3.6935,
+      "target": [1.0193, 3.40557, -3.5939],
+      "position": [0.94973, 0.29278425, -1.60699]
+    }
   },
   {
     "title": "Case",
     "description": "Një strukturë mbrojtëse që përmban dhe organizon komponentët e brendshëm. Siguron qasje të lehtë për përditësime dhe ventilim të mirë për ftohje.",
-    "location": [1, 1, 1]
+    "camera": {
+      "alpha": 2.513,
+      "beta": 1.047,
+      "radius": 7,
+      "target": [0.5, 2, -3.5],
+      "position": [-4.404, 5.5, 0.06325]
+    }
   }
 ];
 
@@ -124,10 +173,11 @@ parts.forEach((part, index) => {
   shikoButton.background = "blue";
   shikoButton.onPointerClickObservable.add(() => {
     console.log(`Shiko button clicked for: ${part.title}`);
-    camera.alpha = Math.PI / 1.25;
-    camera.beta = Math.PI / 3;
-    camera.radius = 7;
-    camera.target = new Vector3(...part.location);
+    camera.alpha = part.camera.alpha;
+    camera.beta = part.camera.beta;
+    camera.radius = part.camera.radius;
+    camera.target = new Vector3(...part.camera.target);
+    camera.setPosition(new Vector3(part.camera.position[0], part.camera.position[1], part.camera.position[2]));
   });
   buttonGrid.addControl(shikoButton, 0, 0);
 
@@ -153,12 +203,14 @@ window.addEventListener("resize", () => {
   engine.resize();
 });
 
-window.addEventListener("keydown", (event) => {
+window.addEventListener("keydown", (event: KeyboardEvent) => {
   if (event.shiftKey && event.ctrlKey && event.altKey && event.key === "D") {
       if (Inspector.IsVisible) {
         Inspector.Hide();
       } else {
         Inspector.Show(scene, {});
       }
+  } else if (event.key === "r") {
+    console.log(`Alpha: ${camera.alpha}\nBeta: ${camera.beta}\nRadius: ${camera.radius}\nTarget: ${camera.target}\nPosition: ${camera.position}`);
   }
 });

@@ -24,6 +24,12 @@ To set up and run the development server, follow these steps:
 3. **Start the Development Server**
 
     ```bash
+    npm start
+    ```
+
+    or
+
+    ```bash
     npx webpack serve
     ```
 
