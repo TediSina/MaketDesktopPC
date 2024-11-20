@@ -43,71 +43,93 @@ guiPanel.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 guiPanel.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;
 guiContainer.addControl(guiPanel);
 
-const partsDescriptions = [
-  "CPU: Central Processing Unit",
-  "Procesori kryesor i sistemit. Përpunon të gjitha udhëzimet e dhëna nga softueri dhe hardueri. Ndikon direkt në performancën e përgjithshme të kompjuterit.",
-  "GPU: Graphics Processing Unit",
-  "Përgjegjës për përpunimin dhe paraqitjen e grafikave dhe vizualizimeve komplekse. E rëndësishme për lojëra, dizajn grafik dhe aplikacione të AI.",
-  "RAM: Random Access Memory",
-  "Kujtesë afatshkurtër ku ruhen përkohësisht të dhënat që përdoren nga proceset aktive. Ndikon në shpejtësinë dhe aftësinë multitasking të sistemit.",
-  "Motherboard",
-  "Komponenti qendror që lidh dhe koordinon të gjithë pjesët e tjera të sistemit. Përfshin porta, konektorë dhe rrugë elektrike për komunikim të ndërsjellë.",
-  "Storage: SSD ose HDD",
-  "Pajisje për ruajtjen afatgjatë të të dhënave dhe skedarëve. SSD ofron shpejtësi më të lartë, ndërsa HDD ka kapacitet më të madh me kosto më të ulët.",
-  "PSU: Power Supply Unit",
-  "Konverton energjinë elektrike nga rrjeti në energji DC që përdorin komponentët. Siguron furnizim të qëndrueshëm dhe të sigurt.",
-  "Cooling System",
-  "Përfshin ventilatorët dhe/ose ftohësit me ujë për të mbajtur temperaturën e sistemit brenda kufijve të sigurt. Parandalon mbinxehjen dhe degradimin e performancës.",
-  "Case",
-  "Një strukturë mbrojtëse që përmban dhe organizon komponentët e brendshëm. Siguron qasje të lehtë për përditësime dhe ventilim të mirë për ftohje.",
+const parts = [
+  {
+    "title": "CPU: Central Processing Unit",
+    "description": "Procesori kryesor i sistemit. Përpunon të gjitha udhëzimet e dhëna nga softueri dhe hardueri. Ndikon direkt në performancën e përgjithshme të kompjuterit."
+  },
+  {
+    "title": "GPU: Graphics Processing Unit",
+    "description": "Përgjegjës për përpunimin dhe paraqitjen e grafikave dhe vizualizimeve komplekse. E rëndësishme për lojëra, dizajn grafik dhe aplikacione të AI."
+  },
+  {
+    "title": "RAM: Random Access Memory",
+    "description": "Kujtesë afatshkurtër ku ruhen përkohësisht të dhënat që përdoren nga proceset aktive. Ndikon në shpejtësinë dhe aftësinë multitasking të sistemit."
+  },
+  {
+    "title": "Motherboard",
+    "description": "Komponenti qendror që lidh dhe koordinon të gjithë pjesët e tjera të sistemit. Përfshin porta, konektorë dhe rrugë elektrike për komunikim të ndërsjellë."
+  },
+  {
+    "title": "Storage: SSD ose HDD",
+    "description": "Pajisje për ruajtjen afatgjatë të të dhënave dhe skedarëve. SSD ofron shpejtësi më të lartë, ndërsa HDD ka kapacitet më të madh me kosto më të ulët."
+  },
+  {
+    "title": "PSU: Power Supply Unit",
+    "description": "Konverton energjinë elektrike nga rrjeti në energji DC që përdorin komponentët. Siguron furnizim të qëndrueshëm dhe të sigurt."
+  },
+  {
+    "title": "Cooling System",
+    "description": "Përfshin ventilatorët dhe/ose ftohësit me ujë për të mbajtur temperaturën e sistemit brenda kufijve të sigurt. Parandalon mbinxehjen dhe degradimin e performancës."
+  },
+  {
+    "title": "Case",
+    "description": "Një strukturë mbrojtëse që përmban dhe organizon komponentët e brendshëm. Siguron qasje të lehtë për përditësime dhe ventilim të mirë për ftohje."
+  }
 ];
 
-partsDescriptions.forEach((description, index) => {
-  const label = new GUI.TextBlock();
-  label.text = description;
-  label.color = "white";
-  label.fontSize = "1.3%";
-  label.textWrapping = true;
-  label.resizeToFit = true;
-  label.height = "60px";
-  label.paddingBottom = "5px";
-  guiPanel.addControl(label);
+parts.forEach((part, index) => {
+  const textLabel = new GUI.TextBlock();
+  textLabel.text = part.title;
+  textLabel.color = "white";
+  textLabel.fontSize = "1.5%";
+  textLabel.fontWeight = "bold";
+  textLabel.textWrapping = true;
+  textLabel.resizeToFit = true;
+  textLabel.height = "60px";
+  textLabel.paddingBottom = "5px";
+  guiPanel.addControl(textLabel);
 
-  if (index % 2 === 1) {
-    const buttonGrid = new GUI.Grid();
-    buttonGrid.addColumnDefinition(0.5);
-    buttonGrid.addColumnDefinition(0.5);
-    buttonGrid.width = "100%";
-    buttonGrid.height = "30px";
-    buttonGrid.paddingBottom = "10px";
+  const descriptionLabel = new GUI.TextBlock();
+  descriptionLabel.text = part.description;
+  descriptionLabel.color = "white";
+  descriptionLabel.fontSize = "1.3%";
+  descriptionLabel.textWrapping = true;
+  descriptionLabel.resizeToFit = true;
+  descriptionLabel.height = "60px";
+  descriptionLabel.paddingBottom = "5px";
+  guiPanel.addControl(descriptionLabel);
 
-    const shikoButton = GUI.Button.CreateSimpleButton(`shiko_button_${index}`, "Shiko");
-    shikoButton.width = "90%";
-    shikoButton.height = "100%";
-    shikoButton.color = "white";
-    shikoButton.cornerRadius = 10;
-    shikoButton.background = "blue";
-    shikoButton.onPointerClickObservable.add(() => {
-      console.log(`Shiko button clicked for: ${description}`);
-    });
-    buttonGrid.addControl(shikoButton, 0, 0);
+  const buttonGrid = new GUI.Grid();
+  buttonGrid.addColumnDefinition(0.5);
+  buttonGrid.addColumnDefinition(0.5);
+  buttonGrid.width = "100%";
+  buttonGrid.height = "30px";
+  buttonGrid.paddingBottom = "10px";
 
-    const lexoButton = GUI.Button.CreateSimpleButton(`lexo_button_${index}`, "Lexo");
-    lexoButton.width = "90%";
-    lexoButton.height = "100%";
-    lexoButton.color = "white";
-    lexoButton.cornerRadius = 10;
-    lexoButton.background = "green";
-    lexoButton.onPointerClickObservable.add(() => {
-      console.log(`Lexo button clicked for: ${description}`);
-    });
-    buttonGrid.addControl(lexoButton, 0, 1);
+  const shikoButton = GUI.Button.CreateSimpleButton(`shiko_button_${index}`, "Shiko");
+  shikoButton.width = "90%";
+  shikoButton.height = "100%";
+  shikoButton.color = "white";
+  shikoButton.cornerRadius = 10;
+  shikoButton.background = "blue";
+  shikoButton.onPointerClickObservable.add(() => {
+    console.log(`Shiko button clicked for: ${part.title}`);
+  });
+  buttonGrid.addControl(shikoButton, 0, 0);
 
-    guiPanel.addControl(buttonGrid);
-  } else {
-    label.fontSize = "1.5%";
-    label.fontWeight = "bold";
-  }
+  const lexoButton = GUI.Button.CreateSimpleButton(`lexo_button_${index}`, "Lexo");
+  lexoButton.width = "90%";
+  lexoButton.height = "100%";
+  lexoButton.color = "white";
+  lexoButton.cornerRadius = 10;
+  lexoButton.background = "green";
+  lexoButton.onPointerClickObservable.add(() => {
+    console.log(`Lexo button clicked for: ${part.title}`);
+  });
+  buttonGrid.addControl(lexoButton, 0, 1);
+
+  guiPanel.addControl(buttonGrid);
 });
 
 engine.runRenderLoop(() => {
