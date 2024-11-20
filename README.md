@@ -1,6 +1,6 @@
 # MaketDesktopPC
 
-Një maket 3D i cili përshkruan çdo pjesë të sistemit kompjuterik.
+Një maket 3D PC-je Desktopi, paraqitur në Babylon.js me GUI interaktiv, i cili përshkruan çdo pjesë të sistemit kompjuterik.
 
 ## How to Run the Development Server
 
