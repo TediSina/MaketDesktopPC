@@ -5,6 +5,7 @@ import {
   Vector3,
   HemisphericLight,
   SceneLoader,
+  ISceneLoaderAsyncResult
 } from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import * as GUI from "@babylonjs/gui";
@@ -24,6 +25,16 @@ const light = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
 light.intensity = 0.7;
 
 SceneLoader.AppendAsync("", desktopPCPath, scene);
+
+const roomResult: Promise<ISceneLoaderAsyncResult> = SceneLoader.ImportMeshAsync("", "./", "stylised_room.glb", scene);
+roomResult.then((result) => {
+  result.meshes.forEach((mesh) => {
+    mesh.scaling = new Vector3(3, 3, 3);
+    mesh.position.x -= 17;
+    mesh.position.y -= 7;
+    mesh.position.z -= 9;
+  });
+});
 
 const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
