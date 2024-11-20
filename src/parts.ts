@@ -68,7 +68,7 @@ export default [
     },
     "info": {
       "imageURI": "./images/Motherboard.webp",
-      "physicalPosition": "Struktura kryesore e brendshme e kompjuterit ku lidhen të gjithë komponentët. Vendoset brenda kasës. Kasa duhet te suportoje madhësine fizike ose siç quhet ndryshe, formën e motherboard-it, si p.sh ATX, Micro ATX etj.",
+      "physicalPosition": "Struktura kryesore e brendshme e kompjuterit ku lidhen të gjithë komponentët. Vendoset brenda kasës. Kasa duhet të suportojë madhësinë fizike ose siç quhet ndryshe, formën e motherboard-it, si p.sh. ATX, Micro ATX etj.",
       "description": "Plaka amë është qendra nervore e kompjuterit, që lidh dhe koordinon të gjithë komponentët. Ajo përfshin një rrjet të gjerë portash, konektorësh dhe rrugë elektrike që mundësojnë komunikimin midis CPU-së, GPU-së, RAM-it, pajisjeve të ruajtjes dhe furnizimit me energji. Plaka amë siguron që të gjitha komponentët të funksionojnë së bashku në harmoni, duke përmbajtur çipa të rëndësishëm si BIOS ose UEFI për menaxhimin e hardware-it dhe bootimin e sistemit operativ. Cilësia dhe përputhshmëria e pllakës amë kanë një ndikim të drejtpërdrejtë në qëndrueshmërinë dhe performancën e përgjithshme të sistemit.",
       "interoperability": "Është ndërmjetësi i cili lejon CPU, RAM, GPU, dhe storage të komunikojnë dhe të punojnë së bashku në mënyrë efektive.",
       "performance": "Përmirësimet në teknologjinë e motherboard-it mund të rrisin kapacitetin dhe shpejtësinë e sistemit.",
