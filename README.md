@@ -11,7 +11,7 @@ To set up and run the development server, follow these steps:
     In Git Bash:
 
     ```bash
-    git clone https://github.com/MatetePlays/MaketDesktopPC.git
+    git clone https://github.com/TediSina/MaketDesktopPC.git
     cd MaketDesktopPC
     ```
 
